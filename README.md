@@ -8,16 +8,19 @@ simAI 관제 화면(front)을 **서버·GPU 없이** 시연 흐름 그대로 돌
 
 ## 실행
 
-필요한 것: Node 24.19, pnpm 11(corepack)
+필요한 것: Node 22.13 이상(24 LTS 권장), pnpm
 
 ```bash
-corepack enable
-pnpm install
-pnpm dev
+git clone https://github.com/chuchangman/simAI-DEMO.git
+cd simAI-DEMO
+pnpm start
 ```
 
-브라우저에서 http://localhost:5173 을 열고 **`demo` / `demo`** 로 로그인합니다(시연 계정).
-이 저장소는 **시연 모드로만** 보입니다: 목 계정은 `demo` 하나이고, 실서버에 붙여도 로그인한 계정은 모두 시연 계정으로 봅니다(`features/demo/demoAccount.ts`).
+- 처음 한 번(또는 `git pull` 로 의존성이 바뀌었을 때)만 의존성을 설치하고, 그다음부터는 설치 없이 바로 켜집니다(`scripts/start.mjs`).
+- 터미널에 찍힌 주소(기본 http://localhost:5173)를 열고 **`demo` / `demo`** 로 로그인합니다. 끄기는 `Ctrl+C`.
+- pnpm 버전은 `packageManager`(pnpm 11.24.0)로 자동으로 맞춰집니다. pnpm 이 없으면 `npm i -g pnpm`.
+- 포트를 바꾸려면 `pnpm start --port 5180` (뒤에 붙인 인자는 vite 로 넘어갑니다).
+  이 저장소는 **시연 모드로만** 보입니다: 목 계정은 `demo` 하나이고, 실서버에 붙여도 로그인한 계정은 모두 시연 계정으로 봅니다(`features/demo/demoAccount.ts`).
 
 ## 시연 흐름
 

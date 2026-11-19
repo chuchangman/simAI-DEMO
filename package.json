@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "start": "node scripts/start.mjs",
     "build": "turbo run build",
     "dev": "turbo run dev --filter=admin",
     "lint": "turbo run lint lint:root check:generated",
@@ -22,7 +23,7 @@
     "typescript": "~6.0.3"
   },
   "engines": {
-    "node": "^24.19.0"
+    "node": ">=22.13"
   },
   "packageManager": "pnpm@11.24.0"
 }
