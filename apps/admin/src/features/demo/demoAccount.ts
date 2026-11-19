@@ -4,8 +4,11 @@ import { useSessionStore } from '@/store/session.store';
 // 값은 로그인 응답의 user.id 다. 실서버는 user_id 숫자를 문자열로 주고('1' 이 실서버 시연 계정), 'demo' 는 mock 계정(mocks/accounts.ts)이다.
 export const DEMO_USER_IDS: readonly string[] = ['demo', '1'];
 
+// simAI-DEMO: 이 저장소는 시연 모드로만 보인다 — 로그인한 계정은 모두 시연 계정으로 본다. 시험(vitest)은 원래 판정을 쓴다.
+const DEMO_ONLY = import.meta.env.MODE !== 'test';
+
 export function isDemoUser(userId: string | undefined): boolean {
-  return userId !== undefined && DEMO_USER_IDS.includes(userId);
+  return userId !== undefined && (DEMO_ONLY || DEMO_USER_IDS.includes(userId));
 }
 
 export function useIsDemoAccount(): boolean {

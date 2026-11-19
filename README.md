@@ -17,7 +17,7 @@ pnpm dev
 ```
 
 브라우저에서 http://localhost:5173 을 열고 **`demo` / `demo`** 로 로그인합니다(시연 계정).
-다른 목 계정: `admin/admin`, `foreman/foreman`, `viewer/viewer` (`apps/admin/src/mocks/accounts.ts`).
+이 저장소는 **시연 모드로만** 보입니다: 목 계정은 `demo` 하나이고, 실서버에 붙여도 로그인한 계정은 모두 시연 계정으로 봅니다(`features/demo/demoAccount.ts`).
 
 ## 시연 흐름
 
