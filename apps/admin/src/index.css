@@ -1,0 +1,111 @@
+@import '@simai/ui/globals.css';
+
+/*
+ * 관제 경보 애니메이션. motion-safe:animate-* 로 써서 움직임 줄이기 설정이면 멈춘다.
+ * alarm-blink: 경보 점멸(1초 주기, 명세 FR-8). bell-ring: 경보음이 울리는 동안 상단 바 소리 버튼의 종이 흔들린다(0.75초 주기, 관제 데모).
+ */
+@theme {
+  --animate-alarm-blink: alarm-blink 1s ease-in-out infinite;
+  --animate-bell-ring: bell-ring 0.75s ease-in-out infinite;
+
+  @keyframes alarm-blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.3;
+    }
+  }
+
+  @keyframes bell-ring {
+    0%,
+    100% {
+      transform: rotate(0);
+    }
+    20% {
+      transform: rotate(16deg);
+    }
+    40% {
+      transform: rotate(-14deg);
+    }
+    60% {
+      transform: rotate(8deg);
+    }
+    80% {
+      transform: rotate(-6deg);
+    }
+  }
+}
+
+/* 도면 모눈(24px). 장면이 없는 화면의 바탕에 깐다. */
+@utility bg-blueprint {
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* 시스템 이상(장면 불일치) 줄무늬(디자인 데모의 띠). 위험 등급 색(빨강·주황·노랑)과 지연 색을 쓰지 않는다. */
+@utility bg-stripes {
+  background-image: repeating-linear-gradient(
+    135deg,
+    var(--stripe-a) 0 16px,
+    var(--stripe-b) 16px 24px
+  );
+}
+
+/*
+ * 구역 편집 패널 값(관제 데모의 --surface-4·--accent-hover·--zp-bg·--zp-field). 모드마다 값이 달라 두 모드 값을 모두 둔다.
+ * tool-card 는 패널 위 묶음의 바탕(칸 바탕 55% + 패널 바탕)이다.
+ */
+:root {
+  --surface-4: #cdd9ea;
+  --primary-hover: #1a4a9e;
+  --tool-panel: var(--card);
+  --tool-field: var(--surface-2);
+}
+
+.dark {
+  --surface-4: #24497f;
+  --primary-hover: #7b98e6;
+  --tool-panel: var(--surface-3);
+  --tool-field: var(--card);
+}
+
+/*
+ * 실시간 관제 오른쪽 패널이 차지하는 자리. 상단 알림·2D 창은 패널 폭에 오른쪽 틈(14px)과 패널 옆 간격(16px)을 더한 만큼 비킨다.
+ * 사건 분할 창(CamSplit)도 이 폭(--cam-split-width)을 그대로 쓴다.
+ */
+:root {
+  --panel-clearance: 30px;
+  --event-panel-width: 340px;
+  --event-panel-inset: calc(var(--event-panel-width) + var(--panel-clearance));
+  --cam-split-width: clamp(340px, 34%, 560px);
+  --cam-split-inset: calc(var(--cam-split-width) + var(--panel-clearance));
+}
+
+/*
+ * 실시간 관제 왼쪽 칼럼(구역 목록)과 그 아래 2D 지도. 지도는 칼럼 폭의 정사각형이고, 낮은 화면(최소 높이 600px)
+ * 에서 목록 자리가 남도록 화면 높이의 34% 까지만 커진다(600px 에서 204px, 목록 칼럼 250px). 칼럼의 아래 끝은 지도 위다
+ * (지도가 바닥에서 띄운 14px + 지도 + 지도와 칼럼 사이 8px).
+ */
+:root {
+  --side-column-width: 260px;
+  --minimap-size: min(var(--side-column-width), 34svh);
+  --side-column-bottom: calc(14px + var(--minimap-size) + 8px);
+}
+
+/* 로그인 카드 바탕. 마스코트 영상 위쪽 배경의 짙은 남색과 같게 해, 가장자리를 흐리게 가린 영상과 이어지게 한다(두 모드 같은 값). */
+:root {
+  --login-hero: #0e1629;
+}
+
+@theme inline {
+  --color-login-hero: var(--login-hero);
+  --color-surface-4: var(--surface-4);
+  --color-primary-hover: var(--primary-hover);
+  --color-tool-panel: var(--tool-panel);
+  --color-tool-field: var(--tool-field);
+  --color-tool-card: color-mix(in srgb, var(--tool-field) 55%, var(--tool-panel));
+}

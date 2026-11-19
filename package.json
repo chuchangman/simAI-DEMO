@@ -1,0 +1,28 @@
+{
+  "name": "simai-demo",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --filter=admin",
+    "lint": "turbo run lint lint:root check:generated",
+    "lint:root": "eslint .",
+    "test": "turbo run test",
+    "typecheck": "turbo run typecheck",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "@simai/eslint-config": "workspace:*",
+    "@simai/typescript-config": "workspace:*",
+    "eslint": "10.12.0",
+    "globals": "17.13.0",
+    "prettier": "3.9.10",
+    "turbo": "2.11.8",
+    "typescript": "~6.0.3"
+  },
+  "engines": {
+    "node": "^24.19.0"
+  },
+  "packageManager": "pnpm@11.24.0"
+}

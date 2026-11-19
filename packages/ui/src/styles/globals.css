@@ -1,0 +1,199 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+@import '@fontsource-variable/noto-sans-kr';
+@import '@fontsource/ibm-plex-mono/400.css';
+@import '@fontsource/ibm-plex-mono/500.css';
+@import '@fontsource/ibm-plex-mono/600.css';
+
+@custom-variant dark (&:is(.dark *));
+@source '../../../apps/**/*.{ts,tsx}';
+@source '../**/*.{ts,tsx}';
+
+@theme inline {
+  --font-sans: 'Noto Sans KR Variable', 'Noto Sans KR', 'Malgun Gothic', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, Consolas, monospace;
+  /* 누름·메뉴처럼 사람이 한 일에 답하는 움직임은 처음이 빠른 강한 ease-out 으로 한다. */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --font-heading: var(--font-sans);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-faint: var(--faint);
+  --color-point-soft: var(--point-soft);
+  --color-sev-critical: var(--sev-critical);
+  --color-sev-high: var(--sev-high);
+  --color-sev-caution: var(--sev-caution);
+  --color-delay: var(--delay);
+  --color-ok: var(--ok);
+  --color-stripe-a: var(--stripe-a);
+  --color-stripe-b: var(--stripe-b);
+  --color-brand-hat: var(--brand-hat);
+  --shadow-float: var(--float-shadow);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/*
+ * 도면 관제반: 다크는 청사진(짙은 도면 파랑 바탕), 화이트는 백사진(옅은 종이에 도면 잉크 파랑).
+ * 값은 팀에 공유한 관제 데모(simAI demo.html)와 같다. 본문 글자(foreground·muted-foreground)는 배경·카드 위에서
+ * 4.5:1 이상이고, 보조 표시인 faint 는 그보다 낮다. 화이트 모드의 상태색은 다크보다 진하다.
+ */
+/* simAI 화이트 모드(백사진). .paper 를 붙인 영역(TBM 회의록 종이)은 다크 모드에서도 이 값을 쓴다. */
+:root,
+.paper {
+  --background: #edf2f8;
+  --foreground: #0b2140;
+  --card: #ffffff;
+  --card-foreground: #0b2140;
+  --popover: #ffffff;
+  --popover-foreground: #0b2140;
+  --primary: #2257b8;
+  --primary-foreground: #ffffff;
+  --secondary: #e9eff6;
+  --secondary-foreground: #0b2140;
+  --muted: #e9eff6;
+  --muted-foreground: #3e5677;
+  --accent: #dce5f0;
+  --accent-foreground: #0b2140;
+  --destructive: #c21d1d;
+  --border: #c9d6e7;
+  --input: #7e93b1;
+  --ring: #1d4f9e;
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --radius: 0.625rem;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #0b2140;
+  --sidebar-primary: #2257b8;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #dce5f0;
+  --sidebar-accent-foreground: #0b2140;
+  --sidebar-border: #c9d6e7;
+  --sidebar-ring: #1d4f9e;
+
+  --surface-2: #e9eff6;
+  --surface-3: #dce5f0;
+  --faint: #5f7596;
+  --point-soft: #1d4f9e;
+  /* 심각도: 위험 빨강·경고 주황·주의 노랑. 지연은 경고와 가르려고 채도를 낮춘 주황이다. */
+  --sev-critical: #c21d1d;
+  --sev-high: #b54f00;
+  --sev-caution: #7a6000;
+  --delay: #8c5a3c;
+  --ok: #137a3e;
+  --stripe-a: #dce5f0;
+  --stripe-b: #c3d2e5;
+  --brand-hat: #16467f;
+  /* 도면 모눈 선(bg-blueprint). */
+  --grid-line: color-mix(in oklab, #1f5bb5 9%, transparent);
+  --float-shadow: 0 10px 28px rgb(11 33 64 / 0.14);
+}
+
+/* simAI 다크(청사진, 기본). */
+.dark {
+  --background: #0a1b33;
+  --foreground: #eef1f8;
+  --card: #0f2645;
+  --card-foreground: #eef1f8;
+  --popover: #14305a;
+  --popover-foreground: #eef1f8;
+  --primary: #6886d5;
+  --primary-foreground: #081221;
+  --secondary: #14305a;
+  --secondary-foreground: #eef1f8;
+  --muted: #14305a;
+  --muted-foreground: #9ba7c5;
+  --accent: #1b3b6b;
+  --accent-foreground: #eef1f8;
+  --destructive: #ff6b74;
+  --border: #26324e;
+  --input: #5d7da8;
+  --ring: #b4c4ee;
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: #0f2645;
+  --sidebar-foreground: #eef1f8;
+  --sidebar-primary: #6886d5;
+  --sidebar-primary-foreground: #081221;
+  --sidebar-accent: #1b3b6b;
+  --sidebar-accent-foreground: #eef1f8;
+  --sidebar-border: #26324e;
+  --sidebar-ring: #b4c4ee;
+
+  --surface-2: #14305a;
+  --surface-3: #1b3b6b;
+  --faint: #6b7797;
+  --point-soft: #b4c4ee;
+  --sev-critical: #ff6b74;
+  --sev-high: #ff8f3f;
+  --sev-caution: #ffd23f;
+  --delay: #d4a27f;
+  --ok: #4fc98a;
+  --stripe-a: #173560;
+  --stripe-b: #234a7c;
+  --brand-hat: #c3cfee;
+  --grid-line: color-mix(in oklab, #7ccbff 8%, transparent);
+  --float-shadow: 0 10px 28px rgb(2 8 20 / 0.5);
+}
+
+.paper {
+  color-scheme: light;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  /* 브라우저가 그리는 선택 영역·스크롤바도 팔레트를 따른다. */
+  html {
+    scrollbar-color: var(--border) transparent;
+  }
+  ::selection {
+    background-color: color-mix(in oklab, var(--primary) 35%, transparent);
+  }
+}

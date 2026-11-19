@@ -1,0 +1,577 @@
+/*
+ * Spatial UI 목업 전용 스타일. dev-harness/main.tsx 에서만 불러온다.
+ * 운영 CSS 에 목업 규칙이 생기지 않도록 Tailwind 클래스 대신 smk- 접두 클래스와 FE 토큰 변수(packages/ui globals.css)를 쓴다.
+ */
+.smk-root {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  overflow: hidden;
+  background: var(--background);
+  color: var(--foreground);
+  font-size: 15px;
+  line-height: 22px;
+}
+.smk-layer {
+  position: absolute;
+  inset: 0;
+}
+.smk-ui {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.smk-float {
+  pointer-events: auto;
+  background: color-mix(in srgb, var(--card) 86%, transparent);
+  box-shadow:
+    inset 0 0 0 1px var(--border),
+    var(--float-shadow);
+  backdrop-filter: blur(8px);
+}
+.smk-mono {
+  font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace;
+}
+
+.smk-top {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 7;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  height: 60px;
+  padding: 0 20px;
+  pointer-events: auto;
+  background: color-mix(in srgb, var(--card) 78%, transparent);
+  box-shadow: 0 1px 0 var(--border);
+  backdrop-filter: blur(8px);
+}
+.smk-brand {
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+}
+.smk-brand span {
+  color: var(--primary);
+}
+.smk-site {
+  font-size: 13px;
+  white-space: nowrap;
+  color: var(--muted-foreground);
+}
+.smk-chip {
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--surface-3);
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  color: var(--muted-foreground);
+}
+.smk-meta {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  overflow: hidden;
+  font-size: 13px;
+  white-space: nowrap;
+  color: var(--faint);
+}
+.smk-meta b {
+  font-weight: 500;
+  color: var(--muted-foreground);
+}
+.smk-status {
+  font-size: 12px;
+  white-space: nowrap;
+  color: var(--muted-foreground);
+}
+
+.smk-card {
+  position: absolute;
+  top: 76px;
+  left: 16px;
+  z-index: 5;
+  width: 248px;
+  padding: 12px;
+  border-radius: 14px;
+  font-size: 14px;
+}
+.smk-card p {
+  margin: 0;
+}
+.smk-card-title {
+  font-weight: 700;
+}
+.smk-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.smk-panel {
+  position: absolute;
+  top: 76px;
+  right: 16px;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  /* 내용 높이만큼만 덮고 Dock 위에서 멈춘다(위 76px + 아래 96px). */
+  max-height: calc(100% - 172px);
+  width: clamp(320px, 24vw, 380px);
+  border-radius: 14px;
+}
+.smk-panel[data-wide] {
+  width: min(620px, calc(100vw - 340px));
+}
+.smk-panel-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.smk-panel-head h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+.smk-close {
+  margin-left: auto;
+}
+.smk-sample {
+  padding: 0 6px;
+  border-radius: 4px;
+  background: var(--surface-3);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted-foreground);
+}
+.smk-panel-body {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 16px;
+  font-size: 14px;
+}
+.smk-hint {
+  margin: 0 0 8px;
+  font-size: 12px;
+  color: var(--muted-foreground);
+}
+.smk-hint-gap {
+  margin-top: 20px;
+}
+.smk-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.smk-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.smk-row:hover {
+  background: var(--surface-2);
+}
+.smk-row[data-active],
+.smk-item[data-active] {
+  background: var(--surface-3);
+  font-weight: 700;
+}
+.smk-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+.smk-grow {
+  flex: 1;
+}
+.smk-id {
+  font-size: 12px;
+  color: var(--muted-foreground);
+}
+.smk-sev {
+  padding: 0 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 20px;
+}
+.smk-sev[data-sev='CRITICAL'] {
+  color: var(--sev-critical);
+  box-shadow: inset 0 0 0 1px var(--sev-critical);
+}
+/* HIGH 는 주황에 점선 테두리로, 색만으로 구분하지 않는다. */
+.smk-sev[data-sev='HIGH'] {
+  color: var(--sev-high);
+  box-shadow: none;
+  outline: 1px dashed var(--sev-high);
+  outline-offset: -1px;
+}
+.smk-sev[data-sev='INFO'] {
+  color: var(--muted-foreground);
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+.smk-sev[data-sev='CAUTION'] {
+  color: var(--sev-caution);
+  box-shadow: inset 0 0 0 1px var(--sev-caution);
+}
+.smk-tiles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.smk-tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  background: repeating-linear-gradient(135deg, var(--stripe-a) 0 12px, var(--stripe-b) 12px 24px);
+  font-size: 12px;
+  color: var(--muted-foreground);
+}
+.smk-box {
+  margin-top: 16px;
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--surface-2);
+  font-size: 12px;
+}
+.smk-fields {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  row-gap: 8px;
+  margin: 0;
+}
+.smk-fields dt {
+  color: var(--muted-foreground);
+}
+.smk-fields dd {
+  margin: 0;
+}
+.smk-plan {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: var(--surface-2);
+}
+
+.smk-nav {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  z-index: 6;
+  display: flex;
+  gap: 2px;
+  padding: 6px;
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--card) 94%, transparent);
+  transform: translateX(-50%);
+}
+.smk-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 92px;
+  min-height: 58px;
+  padding: 6px 10px;
+  border: 0;
+  border-radius: 12px;
+  background: none;
+  color: var(--muted-foreground);
+  font-size: 12px;
+  cursor: pointer;
+}
+.smk-nav-item:hover {
+  background: var(--surface-2);
+  color: var(--foreground);
+}
+.smk-nav-item[aria-pressed='true'] {
+  background: var(--surface-3);
+  color: var(--foreground);
+  font-weight: 700;
+  box-shadow: inset 0 -2px 0 var(--primary);
+}
+.smk-nav-item svg {
+  width: 20px;
+  height: 20px;
+  opacity: 0.85;
+}
+
+/* 개발 보기 선택기. 어느 보기에서든 오른쪽 아래에 이것 하나만 남는다. */
+.smk-views {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  z-index: 9;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  max-width: calc(100% - 32px);
+}
+.smk-view-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+  padding: 6px 12px 6px 16px;
+  border: 0;
+  border-radius: 999px;
+  color: var(--foreground);
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.smk-view-toggle svg {
+  width: 16px;
+  height: 16px;
+  opacity: 0.8;
+}
+.smk-view-caption {
+  font-weight: 500;
+  color: var(--muted-foreground);
+}
+.smk-view-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 240px;
+  max-width: 100%;
+  padding: 6px;
+  border-radius: 12px;
+}
+.smk-view-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  color: var(--foreground);
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+}
+.smk-view-item:hover {
+  background: var(--surface-2);
+}
+.smk-view-item[aria-pressed='true'] {
+  background: var(--surface-3);
+  box-shadow: inset 2px 0 0 var(--primary);
+}
+.smk-view-name {
+  font-weight: 700;
+}
+.smk-view-hint {
+  font-size: 11px;
+  color: var(--muted-foreground);
+}
+.smk-views button:focus-visible,
+.smk-diag button:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Spatial 진단. 왼쪽 아래에 접어 두고, 펼쳐도 FE 목업의 선택 카드·업무 패널·하단 메뉴를 가리지 않는 폭만 쓴다. */
+.smk-diag {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  z-index: 8;
+  display: flex;
+  flex-direction: column;
+  width: 340px;
+  max-width: calc(100% - 32px);
+  /* 데이터 진단을 펼쳐도 상단 바·선택 카드(초점·해제 버튼 포함, 아래 끝 약 200px)를 덮지 않게 높이를 묶고 안에서 스크롤한다. */
+  max-height: calc(100% - 232px);
+  border-radius: 12px;
+  font-size: 12px;
+  line-height: 18px;
+}
+.smk-diag-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 36px;
+  padding: 6px 12px;
+  border: 0;
+  border-radius: 12px;
+  background: none;
+  color: var(--foreground);
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+}
+.smk-diag-head svg {
+  width: 16px;
+  height: 16px;
+  margin-left: auto;
+  opacity: 0.8;
+}
+.smk-diag-state {
+  font-size: 11px;
+  color: var(--muted-foreground);
+}
+.smk-diag-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  min-height: 0;
+  overflow: auto;
+  padding: 0 12px 10px;
+  border-top: 1px solid var(--border);
+}
+.smk-diag-body p {
+  margin: 0;
+}
+.smk-diag-body .smk-chip {
+  border: 0;
+  cursor: pointer;
+}
+.smk-diag-body pre {
+  width: 100%;
+  max-height: 140px;
+  margin: 0;
+  overflow: auto;
+  font-size: 11px;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+.smk-diag-body pre:empty {
+  display: none;
+}
+.smk-legend {
+  padding-top: 8px;
+}
+.smk-legend .smk-hint {
+  margin: 2px 0 0;
+}
+.smk-axis[data-axis='X'] {
+  color: #e5484d;
+}
+.smk-axis[data-axis='Y'] {
+  color: #30a46c;
+}
+.smk-axis[data-axis='Z'] {
+  color: #3e63dd;
+}
+
+/* Provider 데이터 진단(개발 전용). */
+.smk-data {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+.smk-data-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+.smk-data select {
+  max-width: 100%;
+  padding: 2px 6px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface-2);
+  color: var(--foreground);
+  font: inherit;
+}
+.smk-data .smk-chip {
+  border: 0;
+  cursor: pointer;
+}
+.smk-data .smk-chip:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+.smk-data-grid {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  row-gap: 2px;
+  margin: 0;
+  font-size: 11px;
+  line-height: 16px;
+}
+.smk-data-grid dt {
+  color: var(--muted-foreground);
+}
+.smk-data-grid dd {
+  margin: 0;
+  word-break: break-all;
+}
+.smk-data-grid dd[data-stale] {
+  color: var(--sev-caution);
+}
+.smk-meta [data-stale] b {
+  color: var(--sev-caution);
+}
+.smk-data-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  font-size: 11px;
+  line-height: 15px;
+  list-style: none;
+}
+.smk-data-dim {
+  font-size: 11px;
+  color: var(--muted-foreground);
+}
+/* 좁은 화면에서 FE 목업 하단 메뉴와 겹치지 않게 선택기·진단을 메뉴 위로 올린다. */
+@media (max-width: 1160px) {
+  .smk-root[data-mock-ui] .smk-views,
+  .smk-root[data-mock-ui] .smk-diag {
+    bottom: 92px;
+  }
+}
+
+/* 휴대폰 폭에서는 진단을 선택기 위로 쌓고, 측정 결과 높이를 줄여 FE 목업 업무 패널과 닿지 않게 한다. */
+@media (max-width: 640px) {
+  .smk-diag {
+    bottom: 60px;
+  }
+  .smk-root[data-mock-ui] .smk-diag {
+    bottom: 136px;
+  }
+  .smk-diag-body pre {
+    max-height: 72px;
+  }
+}

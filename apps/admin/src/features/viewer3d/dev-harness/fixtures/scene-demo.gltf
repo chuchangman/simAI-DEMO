@@ -1,0 +1,196 @@
+{
+  "asset": {
+    "version": "2.0",
+    "generator": "SimAI Spatial dev fixture (-59). 개발 화면 정합 확인용, 실측 Scene 아님"
+  },
+  "extras": {
+    "axis_convention": "GLTF_Y_UP",
+    "world_frame": "DEMO 10x10m, World (x,y,z) -> (x,z,-y)"
+  },
+  "scene": 0,
+  "scenes": [
+    {
+      "nodes": [0, 1, 2, 3, 4, 5]
+    }
+  ],
+  "nodes": [
+    {
+      "name": "floor",
+      "mesh": 0,
+      "translation": [5, -0.01, -5],
+      "rotation": [0, 0.0, 0, 1.0],
+      "scale": [10, 0.02, 10]
+    },
+    {
+      "name": "podium-1",
+      "mesh": 1,
+      "translation": [7.6, 0.2, -7.4],
+      "rotation": [0, 0.0, 0, 1.0],
+      "scale": [2.4, 0.4, 1.1]
+    },
+    {
+      "name": "desk-1",
+      "mesh": 2,
+      "translation": [2.4, 0.37, -3.6],
+      "rotation": [0, 0.2588196364430847, 0, 0.9659256678396477],
+      "scale": [1.2, 0.74, 0.6]
+    },
+    {
+      "name": "desk-2",
+      "mesh": 2,
+      "translation": [5.0, 0.37, -4.6],
+      "rotation": [0, -0.1305264957017392, 0, 0.991444821419641],
+      "scale": [1.2, 0.74, 0.6]
+    },
+    {
+      "name": "wall-back",
+      "mesh": 3,
+      "translation": [5, 1.1, -10.05],
+      "rotation": [0, 0.0, 0, 1.0],
+      "scale": [10, 2.2, 0.1]
+    },
+    {
+      "name": "wall-left",
+      "mesh": 3,
+      "translation": [-0.05, 1.1, -5],
+      "rotation": [0, 0.0, 0, 1.0],
+      "scale": [0.1, 2.2, 10]
+    }
+  ],
+  "meshes": [
+    {
+      "name": "floor",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1
+          },
+          "indices": 2,
+          "material": 0
+        }
+      ]
+    },
+    {
+      "name": "podium",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1
+          },
+          "indices": 2,
+          "material": 1
+        }
+      ]
+    },
+    {
+      "name": "desk",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1
+          },
+          "indices": 2,
+          "material": 2
+        }
+      ]
+    },
+    {
+      "name": "wall",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1
+          },
+          "indices": 2,
+          "material": 3
+        }
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "name": "floor",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [0.55, 0.58, 0.62, 1],
+        "metallicFactor": 0,
+        "roughnessFactor": 0.9
+      }
+    },
+    {
+      "name": "podium",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [0.62, 0.48, 0.34, 1],
+        "metallicFactor": 0,
+        "roughnessFactor": 0.9
+      }
+    },
+    {
+      "name": "desk",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [0.7, 0.62, 0.48, 1],
+        "metallicFactor": 0,
+        "roughnessFactor": 0.9
+      }
+    },
+    {
+      "name": "wall",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [0.8, 0.8, 0.78, 1],
+        "metallicFactor": 0,
+        "roughnessFactor": 0.9
+      }
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 648,
+      "uri": "data:application/octet-stream;base64,AAAAPwAAAL8AAAC/AAAAPwAAAD8AAAC/AAAAPwAAAD8AAAA/AAAAPwAAAL8AAAA/AAAAvwAAAL8AAAA/AAAAvwAAAD8AAAA/AAAAvwAAAD8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAD8AAAC/AAAAvwAAAD8AAAA/AAAAPwAAAD8AAAA/AAAAPwAAAD8AAAC/AAAAvwAAAL8AAAA/AAAAvwAAAL8AAAC/AAAAPwAAAL8AAAC/AAAAPwAAAL8AAAA/AAAAPwAAAL8AAAA/AAAAPwAAAD8AAAA/AAAAvwAAAD8AAAA/AAAAvwAAAL8AAAA/AAAAvwAAAL8AAAC/AAAAvwAAAD8AAAC/AAAAPwAAAD8AAAC/AAAAPwAAAL8AAAC/AACAPwAAAAAAAAAAAACAPwAAAAAAAAAAAACAPwAAAAAAAAAAAACAPwAAAAAAAAAAAACAvwAAAAAAAAAAAACAvwAAAAAAAAAAAACAvwAAAAAAAAAAAACAvwAAAAAAAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIC/AAAAAAAAAAAAAIC/AAAAAAAAAAAAAIC/AAAAAAAAAAAAAIC/AAABAAIAAAACAAMABAAFAAYABAAGAAcACAAJAAoACAAKAAsADAANAA4ADAAOAA8AEAARABIAEAASABMAFAAVABYAFAAWABcA"
+    }
+  ],
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteOffset": 0,
+      "byteLength": 288,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 288,
+      "byteLength": 288,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 576,
+      "byteLength": 72,
+      "target": 34963
+    }
+  ],
+  "accessors": [
+    {
+      "bufferView": 0,
+      "componentType": 5126,
+      "count": 24,
+      "type": "VEC3",
+      "min": [-0.5, -0.5, -0.5],
+      "max": [0.5, 0.5, 0.5]
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 24,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5123,
+      "count": 36,
+      "type": "SCALAR"
+    }
+  ]
+}

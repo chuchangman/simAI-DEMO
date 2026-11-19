@@ -1,0 +1,2 @@
+# 생성 파일은 어느 OS 에서 체크아웃해도 LF 로 둔다. generate --check 가 생성 결과와 그대로 비교한다.
+src/generated/** text eol=lf

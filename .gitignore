@@ -1,0 +1,23 @@
+node_modules/
+dist/
+coverage/
+.turbo/
+.vite/
+.tanstack/
+*.tsbuildinfo
+.eslintcache
+*.log
+
+# 환경변수: 개발 서버 목 설정(.env.development)과 예시만 올린다
+.env
+.env.*
+!.env.example
+!.env.development
+*.local
+
+# 에디터·OS
+.vscode/
+.idea/
+.claude/
+.DS_Store
+Thumbs.db

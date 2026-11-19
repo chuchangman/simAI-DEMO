@@ -1,0 +1,12 @@
+{
+  "extends": "@simai/typescript-config/react-library.json",
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "noEmit": true,
+    "paths": {
+      "@simai/ui/*": ["./src/*"]
+    }
+  },
+  "include": ["src"]
+}
