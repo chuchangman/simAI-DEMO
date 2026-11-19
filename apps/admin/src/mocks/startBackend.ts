@@ -1,3 +1,5 @@
+import { clearDemoNewMaps } from '@/features/demo/demoNewMap';
+import { clearDemoReportEdits } from '@/features/demo/demoReportEdit.store';
 import { env } from '@/lib/env';
 import { DEMO_FLOW } from '@/mocks/demoFlow';
 
@@ -6,6 +8,11 @@ import { DEMO_FLOW } from '@/mocks/demoFlow';
  * VITE_API_REAL 에 적은 경로(예: /api/auth)는 흉내 내지 않고 개발 서버 프록시로 실서버에 보낸다(vite.config.ts).
  */
 export async function startMockBackend() {
+  // simAI-DEMO: 목 상태는 새로고침마다 처음으로 돌아가므로, 지난 실행의 세션·작업 번호로 남긴 시연 기록도 비운다
+  if (DEMO_FLOW) {
+    clearDemoNewMaps();
+    clearDemoReportEdits();
+  }
   const [
     { network },
     { handlers, staticObjectsMock, tbmMock, workMock, setupMock },

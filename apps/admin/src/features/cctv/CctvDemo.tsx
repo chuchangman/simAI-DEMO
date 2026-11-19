@@ -251,6 +251,12 @@ export function CctvMockWall({
 
 const livePeople = (project: CctvProjector) => <LivePeople project={project} />;
 
+/** simAI-DEMO: 카메라 하나의 모의 영상(교실 선 그림 + 실시간 사람). 시연 모드에서 중계 없이도 카메라가 연결된 것처럼 보인다. */
+export function CctvMockFeed({ cameraId }: { cameraId: string }) {
+  const view = VIEW_BY_ID.get(cameraId);
+  return view ? <Feed view={view} down={false} frozen={false} figures={livePeople} /> : null;
+}
+
 /** 실시간 CCTV 목 화면. health 카메라 상태가 정상이 아니면 그 칸은 신호 없음, World 가 끊기면 멈춤이다. */
 export function CctvDemo() {
   const { fresh, stateOf } = useCameraStates();

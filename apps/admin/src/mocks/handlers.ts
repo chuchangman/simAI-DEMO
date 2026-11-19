@@ -6,7 +6,7 @@ import { createGpuMock } from '@/mocks/gpu';
 import { createHistoryMock } from '@/mocks/history';
 import { createRecordingVideoMock } from '@/mocks/recordings';
 import { sceneHandlers } from '@/mocks/scenes';
-import { createSetupMock } from '@/mocks/setup';
+import { buildCoverageGuidePayload, createSetupMock } from '@/mocks/setup';
 import { createStaticObjectsMock } from '@/mocks/staticObjects';
 import { createTbmMock } from '@/mocks/tbm';
 import { createWorkMock } from '@/mocks/work';
@@ -66,6 +66,14 @@ const DEMO_REUSE_CHECK: ReuseCheck = {
   ],
 };
 
+// simAI-DEMO: 카메라 4대 모두 영상 수신·각도 양호, 옆 카메라 겹침 모두 충분(각도 안내 없음)
+const DEMO_COVERAGE_GUIDE = buildCoverageGuidePayload({
+  guides: [],
+  pairs: buildCoverageGuidePayload().pairs.map((pair) =>
+    pair.grade === 'WEAK' ? { ...pair, inliers: 45, inlier_ratio: 0.36, grade: 'ENOUGH' } : pair,
+  ),
+});
+
 // 작업면은 앱이 살아 있는 동안 상태를 둔다. 구성 묶음 mock(startBackend 의 createZonesMock)이 발행 때 지금 작업면을 싣도록 같은 인스턴스를 나눈다.
 export const staticObjectsMock = createStaticObjectsMock();
 // 개발 서버에서는 세팅 세션이 시간으로 진행한다(보정 뒤 9초에 카메라 확인 걷기 창에서 멈추고(-687), 「걷기 시작」 뒤 12초 걸으면
@@ -76,7 +84,7 @@ export const setupMock = createSetupMock({
   worldAnchorAccepted: true,
   cameraCheckWalk: true,
   // simAI-DEMO: 시연 계정 「새 맵 만들기」는 뒤에서 준비된 맵 재사용으로 시작한다. 그 재사용 후보
-  ...(DEMO_FLOW ? { reuseCheck: DEMO_REUSE_CHECK } : {}),
+  ...(DEMO_FLOW ? { reuseCheck: DEMO_REUSE_CHECK, latestGuide: DEMO_COVERAGE_GUIDE } : {}),
 });
 // 작업 관리 새 흐름(하루 작업·날짜 보고서·서명·제출). 세팅 mock 의 세션으로 세팅 중·끝남을 안다. 같은 경로를 쓰는 옛 TBM mock·세팅 mock·
 // 히스토리 mock 보다 먼저 답해야 해서(모르는 작업·요청은 undefined 로 넘긴다) 아래 목록에서 그 앞에 둔다.

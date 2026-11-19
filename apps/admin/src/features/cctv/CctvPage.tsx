@@ -10,13 +10,14 @@ import {
   type TileBadge,
 } from '@/features/cctv/cctv';
 import { useCctvStore, type PreviewLink } from '@/features/cctv/cctv.store';
-import { CctvDemo } from '@/features/cctv/CctvDemo';
+import { CctvDemo, CctvMockFeed } from '@/features/cctv/CctvDemo';
 import { CctvWall, type WallTile } from '@/features/cctv/CctvWall';
 import { isZoomed, panZoomTransform, visibleRect, type PanZoomView } from '@/features/cctv/panZoom';
 import { DIMMED, TILE_FRAME, tilePan, tileZoom } from '@/features/cctv/tileStyle';
 import { useCameraStates } from '@/features/cctv/useCameraStates';
 import { useCctvPreview } from '@/features/cctv/useCctvPreview';
 import { usePanZoom } from '@/features/cctv/usePanZoom';
+import { useIsDemoAccount } from '@/features/demo/demoAccount';
 import { PageTitle } from '@/features/layout/PageTitle';
 import { useCameraNames } from '@/hooks/useCameraNames';
 import { useTier0Connected } from '@/hooks/useTier0Connected';
@@ -127,6 +128,8 @@ export function CameraTile({
   const phase = useCctvStore((s) => s.views[cameraId]?.phase);
   const link = useCctvStore((s) => s.link);
   const playing = link === 'open' && phase === 'playing';
+  // simAI-DEMO: 시연 모드는 중계가 없어도 모의 영상으로 카메라가 연결된 것처럼 보인다
+  const mockFeed = useIsDemoAccount() && !playing;
   const { ref: tileRef, view, zoomed, dragging, handlers } = usePanZoom();
   const ref = useCallback(
     (canvas: HTMLCanvasElement | null) => attach(cameraId, canvas),
@@ -146,6 +149,11 @@ export function CameraTile({
         )}
         style={{ transform: panZoomTransform(view) }}
       />
+      {mockFeed && (
+        <div className="absolute inset-0">
+          <CctvMockFeed cameraId={cameraId} />
+        </div>
+      )}
       <span className={cn(CAPTION, 'top-2 left-2 font-mono font-semibold')} title={cameraId}>
         {label(cameraId)}
       </span>
@@ -223,6 +231,9 @@ function StatesOnly() {
 /** 중계와 이어지지 않았을 때: 연결 상태 한 줄·행동 유도 문구와 그 아래 모의 화면(한 번 붙은 뒤 끊겨도 같다). */
 function MockWithStatus({ link }: { link: PreviewLink }) {
   const action = disconnectAction(link);
+  // simAI-DEMO: 시연 모드는 끊김 안내 없이 모의 화면만 보인다
+  const demo = useIsDemoAccount();
+  if (demo) return <CctvDemo />;
   return (
     <>
       <div className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">

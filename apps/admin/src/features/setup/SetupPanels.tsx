@@ -1,7 +1,9 @@
 import { tileLabel } from '@/features/cctv/cctv';
 import { useCctvStore } from '@/features/cctv/cctv.store';
+import { CctvMockFeed } from '@/features/cctv/CctvDemo';
 import { DIMMED, TILE_FRAME } from '@/features/cctv/tileStyle';
 import { useCctvPreview } from '@/features/cctv/useCctvPreview';
+import { useIsDemoAccount } from '@/features/demo/demoAccount';
 import { ROOM } from '@/features/plan/plan';
 import {
   AIM_ALL_ALIGNED_TEXT,
@@ -161,6 +163,8 @@ function CameraTile({
   const videoHeight = useCctvStore((s) => s.views[camera.id]?.height);
   const link = useCctvStore((s) => s.link);
   const playing = link === 'open' && phase === 'playing';
+  // simAI-DEMO: 시연 모드는 중계가 없어도 모의 영상으로 카메라가 연결된 것처럼 보인다
+  const demo = useIsDemoAccount();
   const ref = useCallback(
     (canvas: HTMLCanvasElement | null) => attach(camera.id, canvas),
     [attach, camera.id],
@@ -185,6 +189,11 @@ function CameraTile({
         aria-label={`${camera.label} 영상`}
         className={cn('size-full object-contain', !playing && DIMMED)}
       />
+      {demo && !playing && (
+        <div className="absolute inset-0">
+          <CctvMockFeed cameraId={camera.id} />
+        </div>
+      )}
       {cues &&
         !aimKnown &&
         camera.guides.map((guide) => <CameraCue key={guide.text} guide={guide} aspect={aspect} />)}
@@ -206,7 +215,7 @@ function CameraTile({
       <span className={cn(CAPTION, 'top-2 left-2')}>
         <span className="font-semibold">{camera.label}</span>
         {showBadge && <CameraBadgeChip badge={camera.badge} />}
-        {!playing && (
+        {!playing && !demo && (
           <span className="text-muted-foreground">
             {link === 'stopped' ? '미리보기 멈춤' : tileLabel(phase, link)}
           </span>

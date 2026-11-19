@@ -44,6 +44,14 @@ const useDemoReportEditStore = create<DemoReportEditState>()(
   ),
 );
 
+/**
+ * simAI-DEMO: 직접 고친 작업 기록을 비운다. 목은 새로고침마다 작업 번호를 처음부터 다시 매겨, 지난 실행의 기록이 남으면 새 작업이
+ * 미리 쓴 초안 대신 빈 보고서로 보인다. 목을 켤 때 부른다(mocks/startBackend.ts).
+ */
+export function clearDemoReportEdits(): void {
+  useDemoReportEditStore.setState({ workIds: [] });
+}
+
 /** 작업의 보고서를 편집 창에서 직접 고쳐 저장했는가, 그리고 그렇게 남기는 함수. */
 export function useDemoReportEdit(workId: string): { edited: boolean; markEdited: () => void } {
   const edited = useDemoReportEditStore((state) => state.workIds.includes(workId));

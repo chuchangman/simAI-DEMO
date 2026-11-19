@@ -4,6 +4,7 @@ import { useCctvStore } from '@/features/cctv/cctv.store';
 import { CameraTile, StateTile } from '@/features/cctv/CctvPage';
 import { useCameraStates } from '@/features/cctv/useCameraStates';
 import { useCctvPreview } from '@/features/cctv/useCctvPreview';
+import { useIsDemoAccount } from '@/features/demo/demoAccount';
 import { bestCamera, currentPersonId } from '@/features/events/incidents';
 import { targetOfKey } from '@/features/layout/spatialHost/selectionKey';
 import { useFloatSpot } from '@/hooks/useFloatSpot';
@@ -84,6 +85,8 @@ function Content({
 }) {
   const [camera, setCamera] = useState(requestedCamera?.cameraId ?? '');
   const link = useCctvStore((s) => s.link);
+  // simAI-DEMO: 시연 모드는 끊김 줄 없이 모의 영상만 보인다(CameraTile)
+  const demo = useIsDemoAccount();
   const relayIds = useCctvStore((s) => s.cameras);
   const { cameras, stateOf } = useCameraStates();
   const baseIds =
@@ -138,7 +141,7 @@ function Content({
   }, [current, onCurrent]);
   return (
     <>
-      {attach && link !== 'open' && (
+      {attach && link !== 'open' && !demo && (
         <p role="status" className="px-2 pt-2 text-xs">
           {tileLabel(undefined, link)}
         </p>

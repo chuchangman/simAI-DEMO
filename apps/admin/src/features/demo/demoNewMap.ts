@@ -51,6 +51,18 @@ export function markDemoNewMap(sessionId: string, nowMs: number = Date.now()): v
   }
 }
 
+/**
+ * simAI-DEMO: 남긴 세션을 모두 지운다. 목은 새로고침마다 세션 번호를 처음부터 다시 매겨, 지난 실행의 시작 시각이 남으면 새 세션이
+ * 이미 끝난 것(진행 100%·경과 수십 분)으로 보인다. 목을 켤 때 부른다(mocks/startBackend.ts).
+ */
+export function clearDemoNewMaps(): void {
+  try {
+    window.localStorage.removeItem(STORAGE_KEY);
+  } catch {
+    // 저장소를 못 쓰면 남은 것도 없다
+  }
+}
+
 /** 시연 계정의 새 맵으로 시작한 세션이면 시작 시각(ms), 아니면 null. */
 export function demoNewMapStartedAt(sessionId: string | null | undefined): number | null {
   if (!sessionId) return null;
